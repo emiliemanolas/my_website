@@ -13,12 +13,12 @@ params:
     title: Hi, my name is Emilie
   blog: {}
   contact:
-    address:
-      - city: City, ST 00000
-        country: Country
-        street: Street
-        title: Address
-    buttonClear: Clear
+#    address:
+#      - city: City, ST 00000
+#        country: Country
+#        street: Street
+#        title: Address
+   buttonClear: Clear
     buttonSend: Send message
     email:
       - email: emanolas.mfa2022@london.edu
