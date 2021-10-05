@@ -18,7 +18,7 @@ params:
         country: Country
         street: Street
         title: Address
-   buttonClear: Clear
+    buttonClear: Clear
     buttonSend: Send message
     email:
       - email: emanolas.mfa2022@london.edu
