@@ -47,7 +47,7 @@ params:
         url: https://github.com/emiliemanolas
       - icon: fa-linkedin
         label: LinkedIn
-        url: www.linkedin.com/in/emilie-manolas
+        url: https://www.linkedin.com/in/emilie-manolas/
   image: ''
   name: Your name
   navigation:
@@ -57,10 +57,10 @@ params:
     links:
       - name: Home
         url: '#'
+      - name: About Me
+        url: blogs/ipsum
       - name: Blogs
         url: blogs
-      - name: Generic Blog
-        url: blogs/ipsum
       - name: Elements
         url: elements.html
     menu: Menu
@@ -71,19 +71,19 @@ params:
     showcase:
       - image: pic01.jpg
         subtitle: Ipsum Dolor Sit Amet
-        title: Aliquam
+        title: About Me
         url: blogs/aliquam
       - image: pic02.jpg
         subtitle: Feugiat Amet Tempus
-        title: Tempus
+        title: My Passions
         url: blogs/tempus
       - image: pic03.jpg
         subtitle: Lorem Etiam Nullam
-        title: Magna
+        title: R1
         url: blogs/magna
       - image: pic04.jpg
         subtitle: Nisl Sed Aliquam
-        title: Ipsum
+        title: R2
         url: blogs/ipsum
       - image: pic05.jpg
         subtitle: Ipsum Dolor Sit Amet
