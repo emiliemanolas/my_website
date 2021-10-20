@@ -58,35 +58,35 @@ params:
       - name: Home
         url: '#'
       - name: About Me
-        url: blogs/ipsum
+        url: blogs/me
       - name: My Passions
-        url: blogs
+        url: blogs/trav
       - name: My Game
-        url: elements.html
+        url: blogs/game
       - name: Blogs
         url: blogs
     menu: Menu
-    subtitle: Portfolio Website
+    subtitle: My Portfolio Website
     title: EMILIE MANOLAS
   tiles:
     enable: yes
     showcase:
-      - image: pic01.jpg
+      - image: mee.jpg
         subtitle: My Story
         title: About Me
-        url: blogs/aliquam
-      - image: pic02.jpg
+        url: blogs/me
+      - image: Trav.jpg
         subtitle: Tavelling & Horseriding
         title: My Passions
-        url: blogs/tempus
+        url: blogs/trav
       - image: TfL.jpg
         subtitle: Solving the mystery of May & June 2020
         title: TfL Bike Sharing
         url: blogs/tfl
-      - image: TfL.jpg
+      - image: SvsB.jpeg
         subtitle: Who's the best?
         title: Spielberg vs Burton
-        url: blogs/ipsum
+        url: blogs/svsb
       - image: pic05.jpg
         subtitle: A case study of China's, France's and the US' GDP
         title: Cracking GDP Composition
@@ -98,10 +98,10 @@ params:
   two:
     buttonText: Let's Go!
     enable: yes
-    subtitle: "Hi there!
-      \r\n    If you want to get to know me you're in the right place! \r\n    I will tell you my story, give you an overview of my ambitions
-      where I grew up, lived and studied. You'll also have the opportunity to discover my passions.
-      \r\n    Wait that's not all! You'll also get the chance to see some of my work on R and Python!
-      \r\n    Exciting right? ;)."
+    subtitle: "Hi there!  
+      If you want to get to know me you're in the right place!  
+      I will tell you my story, give you an overview of my ambitions, where I grew up, lived and studied. You'll also have the opportunity to discover my passions.  
+      Wait that's not all! You'll also get the chance to see some of my work on R and Python!  
+      Exciting right? ;)."
     title: My Story
     url: blogs

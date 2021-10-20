@@ -1,0 +1,97 @@
+---
+categories:  
+- ""
+- ""
+date: "2021-10-20"
+description: About Me
+draft: false
+image: mee.jpg
+
+keywords: ""
+slug: me
+title: About Me
+---
+
+# About Me
+
+## Origins 
+
+My name is Emilie, I am French and Belgian. I was born in Colmar and grew up in a near village, Wickerschwihr. I went through primary and secondary education there.
+
+*Wickerschwihr*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Wick.jpg", "/img/Wick2.jpg"),error =FALSE)
+knitr::include_graphics(c("/img/Wick5.jpg", "/img/Wick6.jpg"),error =FALSE)
+```
+
+## CV
+
+### Education 
+
+**London Business School, London**  
+ 	Reading for Masters in Financial Analysis  
+  GMAT: 730  
+  London Business School Women Merit Award  
+  Modules in Data Analytics, Financial Modelling  
+
+**ESCP Business School, Paris, Madrid, Berlin**  
+ 	BSc in Management, High Honours, Top 1% of cohort, Dean's List 2019/20/21  
+	Modules in Economics, Operations, Strategy; Electives in Sustainable Finance, Valuation, Big Data
+
+
+### Professional Experience
+
+**TRIPLE A, Strasbourg, France**  
+	France based SME M&A advisory company  
+ 	M&A Analyst Intern (2 months)  
+•	Collaborated with an Associate Director in the creation of information memoranda, analysing financials, and exposing company’s and market’s strengths and opportunities for 8 sell-side mandates  
+•	Conducted the development of a presentation for a funding request amounting to £4m, analysing and exposing the feasibility of the project to produce a financial flow diagram  
+
+**AMAZON, London, United Kingdom**  
+ 	Finance Intern (3 months)  
+•	Developed new tools and analytics, utilising SQL and Power BI, which enabled financial management to access key data, influencing decision making, and drove cost savings of more than £32,000 per month  
+•	Influenced and engaged with internal and external supplier stakeholders, presenting project updates and introducing the launch of new dashboards to finance, functional support teams, and senior leadership  
+•	Led four projects involving financial transaction process mapping, process change impact tracking and identifying financial risks and opportunities  
+•	Generated utilisation and benchmarking analysis as well as reports used as reference to inform stakeholders on key processes and highlight potential cost saving opportunities
+
+**CREDIT MUTUEL, Mulhouse, France**  
+ 	Corporate banking agency  
+ 	Summer Intern (2 months)  
+•	Computed financial statements' data in bank's software, and performed financial analysis in order to make accurate judgements for company briefings  
+•	Managed more than 400 files from the customer database and provided business managers with statistical graphics and tables, summarising their client's portfolio key data, and produced utilising Excel  
+•	Verified the accuracy and similarity of clauses in notary acts and credit contracts for 10 mortgages  
+
+
+### Additional Information
+
+**Volunteering**  
+Student ambassador at LBS and ESCP Business School: advising and supporting future students  
+Member of GirlUp society (UN Foundation initiative) driving gender equality and social change  
+
+**Leadership**  
+Led a team of 5 students and managed client’s relationship as junior consultant for Impact Hub Madrid, project involved identifying best practices of online communities and mapping Spain’s impact ecosystem  
+Treasurer of Bartholdi high school student association: raised £500 for a girls’ orphanage in Vietnam
+
+**Interests**  
+Horse riding, galop 6/7 level, regional competitions in dressage and show jumping  
+Member of ESCP’s basketball team 2018/2019, university tournaments
+
+**Languages **  
+English (fluent), French (native), German (advanced), Spanish (intermediate)
+
+**IT Skills**  
+Excel, PowerPoint, Word, Power BI, SQL, Python (intermediate), R (basic), Azure ML (basic)
+
+
+
+## Bonus: Junior
+
+Here are some pictures of my amazing dog, **Junior**.
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/J1.jpg","/img/Ju1.jpg","/img/ju3.jpg"), error =FALSE)
+```
+
+
+

@@ -1,0 +1,113 @@
+---
+categories:  
+- "Data Manipulation in R"
+- "Data Visualisation in R"
+date: "2021-10-20"
+description: Spielberg vs Burton
+draft: false
+image: SvsB.jpeg 
+keywords: ""
+slug: svsb
+title: Spielberg vs Burton
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="spielberg-vs-burton" class="section level1">
+<h1>Spielberg vs Burton</h1>
+<div id="who-has-the-best-ratings" class="section level2">
+<h2>Who has the best ratings?</h2>
+<p>Here we want to analyse IMBD ratings for Steven Spielberg and Tim Burton and understand who has the best ratings.</p>
+<p>We will use hypothesis testing to analyse if the mean IMBD rating for the two directors are the same.</p>
+<p>H0: IMDB rating for Steven Spielberg and Tim Burton are the same<br />
+Ha: IMDB rating for Steven Spielberg and Tim Burton are different</p>
+<pre class="r"><code>movies &lt;- read_csv(here::here(&quot;data&quot;, &quot;movies.csv&quot;))
+glimpse(movies)</code></pre>
+<pre><code>## Rows: 2,961
+## Columns: 11
+## $ title               &lt;chr&gt; &quot;Avatar&quot;, &quot;Titanic&quot;, &quot;Jurassic World&quot;, &quot;The Avenge~
+## $ genre               &lt;chr&gt; &quot;Action&quot;, &quot;Drama&quot;, &quot;Action&quot;, &quot;Action&quot;, &quot;Action&quot;, &quot;~
+## $ director            &lt;chr&gt; &quot;James Cameron&quot;, &quot;James Cameron&quot;, &quot;Colin Trevorrow~
+## $ year                &lt;dbl&gt; 2009, 1997, 2015, 2012, 2008, 1999, 1977, 2015, 20~
+## $ duration            &lt;dbl&gt; 178, 194, 124, 173, 152, 136, 125, 141, 164, 93, 1~
+## $ gross               &lt;dbl&gt; 7.61e+08, 6.59e+08, 6.52e+08, 6.23e+08, 5.33e+08, ~
+## $ budget              &lt;dbl&gt; 2.37e+08, 2.00e+08, 1.50e+08, 2.20e+08, 1.85e+08, ~
+## $ cast_facebook_likes &lt;dbl&gt; 4834, 45223, 8458, 87697, 57802, 37723, 13485, 920~
+## $ votes               &lt;dbl&gt; 886204, 793059, 418214, 995415, 1676169, 534658, 9~
+## $ reviews             &lt;dbl&gt; 3777, 2843, 1934, 2425, 5312, 3917, 1752, 1752, 35~
+## $ rating              &lt;dbl&gt; 7.9, 7.7, 7.0, 8.1, 9.0, 6.5, 8.7, 7.5, 8.5, 7.2, ~</code></pre>
+<p>We calculate the confidence intervals for both director’s rating and plot a graph of the latest:</p>
+<pre class="r"><code>CI_directors &lt;- movies %&gt;% 
+  filter((director == &quot;Tim Burton&quot;) | (director == &quot;Steven Spielberg&quot;)) %&gt;% 
+  group_by(director)%&gt;%
+  summarise(
+    mean_rating = mean(rating),
+    SD_rating = sd(rating),
+    count_rating = n(),
+    SE_rating = SD_rating/sqrt(count_rating),
+    t_crit = qt(0.975, count_rating-1),
+    CI_low = mean_rating -t_crit * SE_rating,
+    CI_high = mean_rating +t_crit * SE_rating
+  )
+CI_directors &lt;- data.frame(CI_directors)
+CI_directors$director &lt;- factor(CI_directors$directo, levels = c(&quot;Tim Burton&quot;,&quot;Steven Spielberg&quot;))
+
+CI_directors %&gt;% 
+  ggplot()+
+  geom_errorbar(aes(y = director, 
+                    x = mean_rating,
+                    xmin = CI_low, 
+                    xmax = CI_high,
+                    color = director), width = 0.1, size = 2) +
+  geom_point(aes(x = mean_rating,
+                 y = director,
+                 color = director), size = 5) +
+  scale_colour_manual(values = c(&quot;#7FD3EB&quot;, &quot;#F08080&quot;))+
+  labs(
+    title = &quot;Do Spielberg and Burton have the same mean IMDB ratings?&quot;,
+    subtitle = &quot;95% confidence intervals overlap&quot;,x = &quot;Mean IMDB Ratings&quot;, y = &quot;&quot;
+      ) +
+  geom_text(aes(x = mean_rating, y = director, label = sprintf(&quot;%.2f&quot;, mean_rating)), vjust = -2, color=&quot;black&quot;, size=4.5)+
+  geom_text(aes(x = CI_low, y = director, label = sprintf(&quot;%.2f&quot;, CI_low)), vjust = -2, color = &quot;black&quot;, size = 3.5)+
+  geom_text(aes(x = CI_high, y = director, label = sprintf(&quot;%.2f&quot;, CI_high)), vjust = -2, color = &quot;black&quot;, size = 3.5)+
+  geom_rect(aes(xmin = CI_directors[2,8],xmax = CI_directors[1,7], ymin = -Inf, ymax = Inf), color = &quot;grey&quot;, alpha = 0.3)+
+  theme_bw()+
+  NULL</code></pre>
+<p><img src="/blogs/SvsB_files/figure-html/unnamed-chunk-1-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>We run test statistics for both directors:</p>
+<pre class="r"><code>Steven_Tim&lt;-movies %&gt;%
+  filter((director == &quot;Tim Burton&quot;) | (director == &quot;Steven Spielberg&quot;))
+
+t.test(rating~director, data = Steven_Tim)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  rating by director
+## t = 3, df = 31, p-value = 0.01
+## alternative hypothesis: true difference in means between group Steven Spielberg and group Tim Burton is not equal to 0
+## 95 percent confidence interval:
+##  0.16 1.13
+## sample estimates:
+## mean in group Steven Spielberg       mean in group Tim Burton 
+##                           7.57                           6.93</code></pre>
+<pre class="r"><code>set.seed(1234)
+ratings_in_null_world &lt;- Steven_Tim %&gt;%
+  specify (rating ~ director) %&gt;%
+  hypothesize (null = &quot;independence&quot;) %&gt;%
+  generate (reps = 1000, type = &quot;permute&quot;) %&gt;%
+  calculate (stat = &quot;diff in means&quot;, order = c(&quot;Steven Spielberg&quot;, &quot;Tim Burton&quot;))
+
+ratings_in_null_world %&gt;%
+  visualise()</code></pre>
+<p><img src="/blogs/SvsB_files/figure-html/t-test-1.png" width="648" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ratings_in_null_world %&gt;%
+  get_pvalue(obs_stat = 0.64, direction =&quot;both&quot;)</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   p_value
+##     &lt;dbl&gt;
+## 1   0.008</code></pre>
+<p>According to this confidence interval there is a difference between the IMBD ratings of the directors. The graph shows us that Steven Spielberg seems to have higher mean ratings than Tim Burton.</p>
+<p><strong>Congrats Steven!</strong></p>
+</div>
+</div>

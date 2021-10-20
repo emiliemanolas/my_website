@@ -1,0 +1,127 @@
+---
+categories:  
+- ""
+- ""
+date: "2021-10-20"
+description: My Passions # the title that will show up once someone gets to this page
+draft: false
+image: Trav.jpg 
+keywords: ""
+slug: trav
+title: My Passions
+---
+
+# My Passions
+
+## Horseriding
+
+I was only 3 months when my mom first put me on her horse. I suppose it was meant to be. Since then there hasn't be a single year in my life without horseriding.
+
+Every time I saw a horse, I was amazed: moovies, toys and actual horses!
+
+*I was always horseriding*
+
+```{r, echo=FALSE}
+knitr::include_graphics("/img/baby.jpeg", error =FALSE)
+```
+
+I started training when I was only 3 years old and would go to practice lessons once a week, when growing up that frequency increased, I started to pass the "galop" level, participate in competitions and eventually achieved galop 6/7 level.
+
+*Competitions*
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/GCO.jpg","/img/GCO1.jpg"), error =FALSE)
+```
+
+I now have a horse with my mom, his name is Good Time
+
+*Good Time*
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Good1.jpg","/img/goo.jpg"), error =FALSE)
+knitr::include_graphics(c("/img/good1.jpeg","/img/good2.jpeg"), error =FALSE)
+```
+
+
+## My Travel - Pictures
+
+
+### France
+
+*Montreux*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/lake.jpg","/img/lake2.jpg"), error =FALSE)
+```
+
+
+*Verdon Gorge*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/VerdonG1.jpg","/img/VerdonG2.jpg","/img/VerdonG3.jpg"), error =FALSE)
+```
+
+
+*Saint-Tropez*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/STrop1.jpg","/img/STrop2.jpg"), error =FALSE)
+```
+
+
+*Paris*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Paris1.jpg","/img/Paris2.jpg"), error =FALSE)
+```
+
+
+### Spain
+
+*Alicante*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Alicante1.jpg","/img/Alicante2.jpg"), error =FALSE)
+```
+
+
+*Valencia*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Valencia1.jpg","/img/Valencia2.jpg"), error =FALSE)
+```
+
+
+### Malta
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Malta1.jpg","/img/Malta2.jpg"), error =FALSE)
+```
+
+
+### Portugal
+
+*I'm also a foodie*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Portual1.jpg","/img/Portugal3.jpg", "/img/Portugal2.jpg"), error =FALSE)
+```
+
+
+### Belgium
+
+*Junior on the beach*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Belg1.jpg","/img/BelgJu.jpg"), error =FALSE)
+```
+
+
+### Greece
+
+*Santorini*
+
+```{r, echo=FALSE}
+knitr::include_graphics(c("/img/Sant1.jpg","/img/Sant2.jpg"), error =FALSE)
+```
+
+
+
