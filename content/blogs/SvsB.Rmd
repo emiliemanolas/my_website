@@ -12,6 +12,7 @@ title: Spielberg vs Burton
 ---
 
 # Spielberg vs Burton
+
 ## Who has the best ratings?
 
 Here we want to analyse IMBD ratings for Steven Spielberg and Tim Burton and understand who has the best ratings.

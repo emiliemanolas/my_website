@@ -87,10 +87,10 @@ params:
         subtitle: Who's the best?
         title: Spielberg vs Burton
         url: blogs/svsb
-      - image: pic05.jpg
+      - image: gdp.jpeg
         subtitle: A case study of China's, France's and the US' GDP
         title: Cracking GDP Composition
-        url: blogs/ipsum
+        url: blogs/gdp
       - image: pic06.jpg
         subtitle: My Fabulous Game
         title: Terraria
