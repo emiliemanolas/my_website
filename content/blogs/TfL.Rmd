@@ -1,0 +1,165 @@
+---
+categories:  
+- "Data Manipulation in R"
+- "Data Visualisation in R"
+date: "2021-10-20"
+description: TfL Bike Sharing # the title that will show up once someone gets to this page
+draft: false
+image: TfL.jpg # save picture in \static\img\blogs. Acceptable formats= jpg, jpeg, or png . Your iPhone pics wont work
+
+keywords: ""
+slug: tfl
+title: TfL Bike Sharing
+---
+
+# TfL Bike Sharing
+
+## Solving the mystery of May & June 2020
+
+
+Here we will explore data about TfL bike's rental from 2015 to 2020. Our main goal is to identify and understand changes in bike rentals compared to expectations
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, include=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(lubridate)
+library(here)
+library(skimr)
+library(janitor)
+library(httr)
+library(readxl)
+library(vroom)
+library(scales)
+```
+
+```{r, get_tfl_data, cache=TRUE}
+url <- "https://data.london.gov.uk/download/number-bicycle-hires/ac29363e-e0cb-47cc-a97a-e216d900a6b0/tfl-daily-cycle-hires.xlsx"
+
+# Download TFL data to temporary file
+httr::GET(url, write_disk(bike.temp <- tempfile(fileext = ".xlsx")))
+
+# Use read_excel to read it as dataframe
+bike0 <- read_excel(bike.temp,
+                   sheet = "Data",
+                   range = cell_cols("A:B"))
+
+# change dates to get year, month, and week
+bike <- bike0 %>% 
+  clean_names() %>% 
+  rename (bikes_hired = number_of_bicycle_hires) %>% 
+  mutate (year = year(day),
+          month = lubridate::month(day, label = TRUE),
+          week = isoweek(day))
+```
+
+
+We plot bikes hired by month and year in order to indentify some patterns or unusual rentals.
+
+```{r tfl_month_year_grid, echo=FALSE, out.width="100%"}
+knitr::include_graphics(here::here("images", "tfl_distributions_monthly.png"), error = FALSE)
+```
+
+For May and June 2020, we see higher levels of bike rentals than expected and also higher rentals than we saw for most of the years prior to 2020. This is likely due to the COVID-19 pandemic, as during Q2 of 2020, when people got to go outside for a bit after some restrictions were lifted, many took the opportunity to get some fresh air by renting bicycles during the warmer months of the year, resulting in much higher actual rental figures than expected figures, and higher figures than most of the years prior.
+
+We then plot a graph that will show the monthly changes in TfL rentals:
+
+``` {r tfl_absolute_monthly, fig.width=30,fig.height=20}
+# Calculate the expected rentals per month 
+bike_monthly_average <- bike %>% 
+  filter(year>2015) %>% 
+  group_by(month) %>% 
+  summarize(monthly_average = mean(bikes_hired))
+
+# Calculate the average rentals per year & month 
+bike_monthly_average_by_year <- bike %>% 
+  filter(year>2015) %>% 
+  group_by(year,month) %>% 
+  summarize(monthly_average = mean(bikes_hired))
+
+# Combine both expected and actual rentals per year & month   
+bike_joint <- bike_monthly_average_by_year %>%   
+  inner_join(bike_monthly_average, by = "month") %>% 
+  mutate(
+    fill_up = if_else(monthly_average.x > monthly_average.y, monthly_average.x - monthly_average.y, 0),
+    fill_down = if_else(monthly_average.x < monthly_average.y, monthly_average.y - monthly_average.x, 0)
+  )
+
+# Create a graph to visualise expected versus actual rentals  
+bike_joint %>% 
+  ggplot(aes(x=month)) +  
+  geom_line(aes(y=monthly_average.x, group = 1), size = .1) + 
+  geom_line(aes(y=monthly_average.y, group = 1),size = .8, colour = "blue") + 
+  facet_wrap(~year)+ 
+  geom_ribbon(aes(ymin = monthly_average.y, ymax = monthly_average.y + fill_up, group = 1),fill = "#7DCD85", alpha = .4) +
+  geom_ribbon(aes(ymin = monthly_average.y - fill_down, ymax = monthly_average.y, group = 1), fill="#CB454A",alpha= .4) +
+  theme_minimal() +
+  labs(title = "Monthly changes in TfL bikes rentals", subtitle = "Change from monthly average shown in blue\nand calculated between 2016-2019", caption = "Source: TfL, London Data Store", y = "Bike rentals", x = "") +
+  NULL
+
+```
+On that graph we can see in blue the monthly bike hired, i.e. what we would expect. The black lines represents the actual hired and the green and red areas show excess or deficit compared to what is expected.
+
+Now we plot another graph that will show the weekly changes in TfL rentals:
+
+``` {r tfl_percent_weekly, fig.width=30,fig.height=20}
+# Calculate the expected rentals per week
+expected_rentals <- bike %>% 
+  filter(year>2015) %>%
+  mutate(week=if_else(month == 'Jan' & week == 53, 1, week)) %>%
+  group_by(week) %>% 
+  summarize(expected_rentals = mean(bikes_hired))
+
+# Calculate the average rentals per year & week 
+actual_rentals <- bike %>% 
+  filter(year>2015) %>%
+  mutate(week=if_else(month == 'Jan' & week == 53, 1, week)) %>%
+  group_by(year,week) %>% 
+  summarize(actual_rentals = mean(bikes_hired))
+
+# Combine both expected and actual rentals per year & week    
+bike_joint_week <- actual_rentals %>%   
+  inner_join(expected_rentals, by = "week") %>%
+  mutate(
+    percentage_change = ((actual_rentals - expected_rentals)/expected_rentals),
+    fill_down = if_else(percentage_change < 0, percentage_change, 0),
+    fill_up = if_else(percentage_change > 0, percentage_change, 0),
+    scale_colour=if_else(fill_up > 0, "#7DCD85","#CB454A"))
+
+# Replicate expected graph  
+bike_joint_week %>% 
+  ggplot(aes(x = week)) +  
+  geom_line(aes(y = percentage_change, group = 1),size = .1)+
+  facet_wrap(~year)+ 
+  geom_ribbon(aes(ymin = 0, ymax = fill_down, group = 1),fill = "#CB454A", alpha = .5) +
+  geom_ribbon(aes(ymin = fill_up, ymax = 0, group = 1),fill = "#7DCD85", alpha = .5) +
+  annotate(geom = "rect", xmin=13, xmax=26, ymin=-Inf, ymax=Inf, alpha=0.15) +
+  annotate(geom = "rect", xmin=39, xmax=53, ymin=-Inf, ymax=Inf, alpha=0.15) +
+  geom_rug(aes(color=scale_colour), sides='b', show.legend = FALSE) +
+  scale_colour_manual(breaks=c("#7DCD85","#CB454A"), values=c('#7DCD85', '#CB454A')) +
+  scale_x_continuous(limits = c(0, 53), breaks = c(13, 26, 39, 53))+
+  scale_y_continuous(labels = scales::percent, limits = c(-.5, 1), breaks = c(-.5, 0, .5, 1)) +
+  theme_minimal() +
+  labs(title = "Weekly changes in TfL bikes rentals", subtitle = "% change from weekly averages\ncalculated between 2016-2019", caption = "Source: TfL, London Data Store", y = "", x = "week") +
+  NULL
+
+```
+
+On that graph we can see in green and red the deviations from  the weekly average.

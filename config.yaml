@@ -59,47 +59,49 @@ params:
         url: '#'
       - name: About Me
         url: blogs/ipsum
+      - name: My Passions
+        url: blogs
+      - name: My Game
+        url: elements.html
       - name: Blogs
         url: blogs
-      - name: Elements
-        url: elements.html
     menu: Menu
-    subtitle: By Emilie Manolas
-    title: MYWORLD
+    subtitle: Portfolio Website
+    title: EMILIE MANOLAS
   tiles:
     enable: yes
     showcase:
       - image: pic01.jpg
-        subtitle: Ipsum Dolor Sit Amet
+        subtitle: My Story
         title: About Me
         url: blogs/aliquam
       - image: pic02.jpg
-        subtitle: Feugiat Amet Tempus
+        subtitle: Tavelling & Horseriding
         title: My Passions
         url: blogs/tempus
-      - image: pic03.jpg
-        subtitle: Lorem Etiam Nullam
-        title: R1
-        url: blogs/magna
-      - image: pic04.jpg
-        subtitle: Nisl Sed Aliquam
-        title: R2
+      - image: TfL.jpg
+        subtitle: Solving the mystery of May & June 2020
+        title: TfL Bike Sharing
+        url: blogs/tfl
+      - image: TfL.jpg
+        subtitle: Who's the best?
+        title: Spielberg vs Burton
         url: blogs/ipsum
       - image: pic05.jpg
-        subtitle: Ipsum Dolor Sit Amet
-        title: Consequat
+        subtitle: A case study of China's, France's and the US' GDP
+        title: Cracking GDP Composition
         url: blogs/ipsum
       - image: pic06.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Etiam
+        subtitle: My Fabulous Game
+        title: Terraria
         url: blogs/ipsum
   two:
     buttonText: Let's Go!
     enable: yes
     subtitle: "Hi there!
-      \r\n    If you want to get to know me you're in the right place! \r\n    I will tell you my story, give you an overview of 
-      where I grew up, where I studied and my ambitions. You'll have the opportunity to discover my passions.
+      \r\n    If you want to get to know me you're in the right place! \r\n    I will tell you my story, give you an overview of my ambitions
+      where I grew up, lived and studied. You'll also have the opportunity to discover my passions.
       \r\n    Wait that's not all! You'll also get the chance to see some of my work on R and Python!
-      Exciting right? ;)."
+      \r\n    Exciting right? ;)."
     title: My Story
     url: blogs
