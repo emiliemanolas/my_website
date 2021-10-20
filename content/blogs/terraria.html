@@ -20,5 +20,506 @@ title: Terraria
 <h2>My Fabulous Game</h2>
 <p>This is a game I coded as part of a university project.</p>
 <p>You can play it <a href="https://colab.research.google.com/gist/emiliemanolas/96c17fadcec4b83c60a489a9e5657cf1/terraria-game.ipynb">here</a></p>
+<div id="code-of-the-game" class="section level3">
+<h3>Code of the Game</h3>
+<p>import random #useful to randomly pick up a monster/enigma</p>
+<p>class Item: #ENCAPSULATION, contains attributes of the different items of the shop<br />
+def <strong>init</strong> (self,name,percentage,price,description):<br />
+self.__name=name<br />
+self.__percentage=percentage<br />
+self.__price=price<br />
+self.__description=description</p>
+<p>def getNameShop(self):<br />
+return self.__name<br />
+def getPercentage (self):<br />
+return self.__percentage<br />
+def getPrice (self):<br />
+return self.__price<br />
+def getDescription(self):
+return self.__description</p>
+<p>class Potion(Item): #INHERITANCE of Item class<br />
+def <strong>init</strong> (self,name,percentage,price,description):<br />
+super().__init__(name,percentage,price,description)</p>
+<p>class Shield(Item): #INHERITANCE of Item class<br />
+def <strong>init</strong> (self,name,percentage,price,description):<br />
+super().__init__(name,percentage,price,description)</p>
+<p>class Weapon(Item): #INHERITANCE of Item class<br />
+def <strong>init</strong> (self,name,percentage,price,description):<br />
+super().__init__(name,percentage,price,description)</p>
+<p>#Objects creation - Items of the shop<br />
+p1=Potion(“Life Potion”,20,20,” - will increase your health by 20 points”)<br />
+p2=Potion(“Super Life Potion”,40,40,” - will increase your health by 40 points”)</p>
+<p>s1=Shield(“Shield”,0.2,20,” - will disminish strength of monster attacks by 20%“)<br />
+s2=Shield(”Super Shield”,0.3,35,” - will disminish strength of monster attacks by 30%“)<br />
+s3=Shield(”Magic Shield”,0.5,50,” - will disminish strength of monster attacks by 50%“)</p>
+<p>w1=Weapon(“Super Weapon”,0.2,20, ” - will increase strength of your attack by 20%“)<br />
+w2=Weapon(”Magic Weapon”,0.4,40, ” - will increase strength of your attack by 40%“)</p>
+<p>itemList=[p1,p2,s1,s2,s3,w1,w2] #useful in Shop class</p>
+<p>class Shop:<br />
+def <strong>init</strong>(self):<br />
+self.item=Item(0,0,0,0) #COMPOSITION - uses methods of Item class</p>
+<p>def displayShopList(self): #display all the elements available in the shopr - their name, price and description
+for i in range(0,len(itemList)): #uses “for” because easier when working with lists<br />
+self.item=itemList[i]<br />
+print(“”,i,“-”,self.item.getNameShop(),“costs”,self.item.getPrice(),“diamonds”,self.item.getDescription())<br />
+print(“ - Quit”)</p>
+<p>def enterShop(self): #Welcome sentence to the shop<br />
+print(“to Terraria’s Secret Shop!you will be able to find different items that will help you along the adventure.the corresponding number to buy the item. Choose wisely your life depends on it!”)</p>
+<p>class Threat: #ENCAPSULATION<br />
+def <strong>init</strong> (self,name,scorePoint,diamonds):<br />
+self.__name=name<br />
+self.__scorePoint=scorePoint<br />
+self.__diamonds=diamonds</p>
+<p>def getName(self):<br />
+return self.__name<br />
+def getScorePoint(self):<br />
+return self.__scorePoint<br />
+def getDiamonds(self):<br />
+return self.__diamonds</p>
+<p>def setName(self,name):<br />
+self.__name=name<br />
+def setScorePoint(self,scorePoint):<br />
+self.__scorePoint=scorePoint</p>
+<p>class Monster(Threat): #INHERITANCE of Threat - ENCAPSULATION<br />
+def <strong>init</strong> (self,name,scorePoint,diamonds,description,maxMonsterHealth):</p>
+<pre><code>super().__init__(name,scorePoint,diamonds)  
+self.__description=description  
+self.__maxMonsterHealth=maxMonsterHealth  
+self.__currentMonsterHealth=maxMonsterHealth  
+self.__mPlayerHealthPoint=random.randint(5,20)   #defines how much health points the player loses when he attacks the monster (because the monster replies)  </code></pre>
+<p>def getDescription(self):<br />
+return self.__description<br />
+def getCurrentMonsterHealth(self):<br />
+return self.__currentMonsterHealth<br />
+def getMPlayerHealthPoint(self):<br />
+return self.__mPlayerHealthPoint</p>
+<p>def setCurrentMonsterHealth(self,x):<br />
+self.__currentMonsterHealth=x</p>
+<p>def monsterAlive (self): #check if monster is alive, useful in Game class for the loop of monsterThreat (stops when monster dead)<br />
+if self.__currentMonsterHealth &gt; 0:
+return True<br />
+else:<br />
+return False</p>
+<p>def resetMonster(self): #reset the monster’s health to its maximum - useful in level 1 if you have to fight twice the same monster<br />
+self.__currentMonsterHealth=self.__maxMonsterHealth</p>
+<p>def monsterInfo (self): #display monster’s info<br />
+print(“You will be fighting with”, self.getName(),“.”,self.__description)</p>
+<p>#Objects creation - Monsters</p>
+<p>monster1=Monster(“Goblin”,20,10,“Goblins are little and malevolent creatures whose primary purpose is to trouble humans. They are green, dirty and fast.are usually found among the branches of trees as they seek shelter there.their small size they can very dangerous through their venom, which is injected into the victims by bite.”,35)<br />
+monster2=Monster(“Yeti”,30,15,“The Yeti is a solitaire creature who lives in the coldest regions of the forest. It hunts at night and it feeds on deer. is big, muscular and it can reach 10 foot in height. Its whole body is covered in white fur.’s power is Ice.”,45)<br />
+monster3=Monster(“Minotaur”,40,20,“The Minotaur is widely considered as the most violent of the monsters.is described as a creature with the body of a man and the head and tail of a bull. His aberration has caused Minotaur to develop a tremendous strength which enables him to charge and smash almost every enemy.”,55)<br />
+monster4=Monster(“Cerberus”,50,25,“Cerberus is one of the most dangerous monsters. It resembles the appearance of a dog; , it is bigger, it has three heads and a serpent as a tail. Cerberus can be found almost everywhere in the forest, as it loves to hunt during daylight.has the particular ability of instilling fear in its preys, up to a point in which they completely lose their minds.”,70)<br />
+monster5=Monster(“Hydra”,60,30,“The Hydra is a serpent-like monster. It lives and hunts in the swamps and it has become famous for fisherman-disappearance stories.is black, long, and it has many heads. It is said that if you cut one of the heads, two new heads will grow straightaway.is, therefore, a very hard enemy to beat.”,80)<br />
+monster6=Monster(“Dragon”,200,50,“It is narrated that killing a Dragon is an almost impossible undertaking. Dragons are the biggest of the monsters.has ever survived to give a proper description of it, but common beliefs suggest they are huge winged creatures with the body covered by a scale-armour.is also said that dragons can irradiate fire from their mouths.”,150)</p>
+<p>monsterList=[monster1,monster2,monster3,monster4,monster5] #useful in Game class - method monster threat</p>
+<p>class Enigma(Threat): #INHERITANCE of Threat - ENCAPSULATION:<br />
+def <strong>init</strong> (self,name,scorePoint,diamonds,question,solution,options):</p>
+<pre><code>super().__init__(name,scorePoint,diamonds)  
+self.__question=question  
+self.__solution=solution  
+self.__options=options  
+self.__ePlayerHealthPoint=random.randint(40,50) #defines how much health points the player loses when he doesn&#39;t solve the enigma  </code></pre>
+<p>def getQuestion(self):<br />
+return self.__question<br />
+def getSolution(self):<br />
+return self.__solution<br />
+def getOption(self):<br />
+return self.__options<br />
+def getEPlayerHealthPoint(self):<br />
+return self.__ePlayerHealthPoint</p>
+<p>def enigmaInfo1(self): #display engima’s information - format 1<br />
+print(“will have to solve the following Enigma:”,self.getName(),“”,self.__question,“the corresponding letter: a, b, c or d ”,self.__options)</p>
+<p>def enigmaInfo2(self): #display engima’s information - format 2<br />
+print(“”,self.getName(),“”,self.__question,“the corresponding letter: a, b, c or d ”,self.__options)</p>
+<p>def enigmaSolved(self): #check if player gave the good anwer, useful in Game class for the loop of enigma Threat (stops when enigma solved)</p>
+<pre><code>if input()==self.__solution:  
+  return True  
+else:  
+  return False  </code></pre>
+<p>#Object creation - Enigmas</p>
+<p>enigma1=Enigma(“Water”,20,10,“I start off dry but emerge wet. I go in light but emerge heavy. What am I?”,“d”,” a. Riceb. Powderc. Toweld. Teabag”)<br />
+enigma2=Enigma(“Month”,40,20,“Which month has 28 days ?”,“b”,” a. Novemberb. Februaryc. Januaryd. All of them”)<br />
+enigma3=Enigma(“Past”,30,15,“The more you take, the more you leave behind. What are they?”,“c”,” a. Memoriesb. Coinsc. Footstepsd. Friends”)<br />
+enigma4=Enigma(“Cinema”,50,25,“A grandfather, two fathers and two sons went to the movie theatre together and everyone bought one movie ticket each. many tickets did they buy in total?”,“c”,” a. 5b. 4c. 3d. 2”)<br />
+enigma5=Enigma(“Feet”,60,30,“A duck was given $8, a spider was given $32, a bee was given $24. off of this information, how much money would be given to a cat?”,“d”,” a. 12b. 20c. 24d. 16”)<br />
+enigma6=Enigma(“ZOO”,100,50,“If the zookeeper had 100 pairs of animals in her zoo if two pairs of babies are born for each and every one of the original animals, then sadly 23 animal don’t survive, how many animals do you have left in total?”,“a”,” a. 977b. 777c. 1027d. 877”)<br />
+enigma7=Enigma(“Circle”,100,50,“If 66=2, 99=2, 888=6, 00=2, 7777=0, 667=2, 276=1, 833=2, then what does 2876 equal?”,“b”,” a. 1b. 3c. 2d. None of the above”)</p>
+<p>enigmaList=[enigma1,enigma2,enigma3,enigma4,enigma5]<br />
+enigmaListFinal=[enigma6,enigma7]</p>
+<p>class Player: #ENCAPSULATION<br />
+def <strong>init</strong> (self,name,gender,species,description):</p>
+<pre><code>self.__name=name  
+self.__gender=gender  
+self.__title=0  
+self.__species=species  
+self.__description=description  
+self.__health=100  
+self.__score=0  
+self.__weapon=0  
+self.__level=1  
+self.__shield=0  
+self.__diamonds=20  
+self.message=Message() #COMPOSITION - uses functions of Message  </code></pre>
+<p>def getName(self):<br />
+return self.__name<br />
+def getGender(self):<br />
+return self.__gender<br />
+def getSpecies(self):<br />
+return self.__species<br />
+def getDescription(self):<br />
+return self.__description<br />
+def getHealth(self):<br />
+return self.__health<br />
+def getScore(self):<br />
+return self.__score<br />
+def getWeapon(self):<br />
+return self.__weapon<br />
+def getLevel(self):<br />
+return self.__level<br />
+def getShield(self):<br />
+return self.__shield<br />
+def getDiamonds(self):<br />
+return self.__diamonds</p>
+<p>def setWeapon(self,weapon):<br />
+self.__weapon=weapon<br />
+def setShield(self,shield):<br />
+self.__shield=shield<br />
+def setHealth(self,h):<br />
+self.__health=h</p>
+<p>def avatar(self): #finish creating an avatar (starts in Game class)</p>
+<pre><code>if self.__species==&quot;Human&quot;:  
+  self.__description=self.message.human()  
+elif self.__species==&quot;Elf&quot;:  
+  self.__description=self.message.elf()  
+elif self.__species==&quot;Wizard&quot;:  
+  self.__description=self.message.wizard()
+else:  
+  self.__description=self.message.dwarf()  
+
+if self.__gender==&quot;Male&quot;:  
+  self.__title=&quot;Sir&quot;  
+elif self.__gender==&quot;Female&quot;:  
+  self.__title=&quot;Dame&quot;  
+else:  
+  self.__title=&quot;Dear&quot;  </code></pre>
+<p>def getInfoAvatar(self): #display avatar’s information<br />
+print(“”,self.__title,self.__name,“,”,“”,self.__description)</p>
+<p>def increasePlayerScore(self,y):<br />
+self.__score+=y</p>
+<p>def decreaseHealth(self,x):<br />
+self.__health-=x</p>
+<p>def increaseDiamonds(self,z):<br />
+self.__diamonds+=z</p>
+<p>def increaseHealth(self,health):<br />
+self.__health+=health</p>
+<p>def levelCheck(self): #verify and update the level at which the player is - used in play method of Game class</p>
+<pre><code>if self.__score&lt;200 and (self.__score==100 or self.__score&gt;100):  
+  previousLevel=self.__level  
+  self.__level=2  
+  if previousLevel!=2: #display message only if the level changed  
+    self.message.level2()  
+if self.__score&lt;500 and (self.__score==200 or self.__score&gt;200):  
+  previousLevel=self.__level  
+  self.__level=3  
+  if previousLevel!=3: #display message only if the level changed  
+    self.message.level3()  </code></pre>
+<p>def rest(self): #increase player’s health when he decides to take a break and rest<br />
+self.__health+=random.randint(10,20)</p>
+<p>class Message: #narrative - contains different messages used along the game
+def <strong>init</strong> (self):</p>
+<pre><code>self.text=[] # list that contains the different messages  
+self.text.append(&quot;Welcome, lone traveller! \n\nIt seems that you have gotten lost on your journey and have stumbled into an alternate dimension.\nYou have stumbled upon the fantastic world of Terraria. You see, our world was once a fruitful and exciting place.\nThat is, until the DEN (Dark Evil Nation) attacked. With their terrible monsters and spiteful warlocks they brought pain, suffering,\nand sorrow onto our beautiful land and you are our last hope. We need your help to fight these terrible monsters and answer difficult enigmas posed by the evil warlocks.\nWhat do you say? Are you in? The land of Terraria depends on you!&quot;)  
+self.text.append(&quot;\n\nYou have 5 commands, write the corresponding number to access it \n\n   1. Help \n   2. Move to next threat \n   3. Rest \n   4. Shop \n   5. Quit&quot;)  
+self.text.append(&quot;\n\nGame over! You have lost all your health points and your body cannot recover! Please try again.&quot;)
+self.text.append(&quot;\n\nCongratulations! You have battled the most ferocious monsters and outsmarted powerful warlocks.\nYou achieve victory against the Dark Evil Nation.\n\nThanks to your bravery and efforts Terraria is saved from the DEN and it is now a wonderful place full of life.&quot;)  
+self.text.append(&quot;\n\nGood bye! Terraria hopes to see you soon!&quot;)  
+self.text.append(&quot;\n\nYou access level 1 and enter The Dark Forest.\n\nYou have entered into the mysterious Dark Forest. This place used to be where children came to play, shows were put on, and it was full of life.\nHowever, since the DEN have invaded, it has become a hub for these twisted monsters.\nOnly the bravest dare to go through it, and very few make it out alive.&quot;)  
+self.text.append(&quot;\n\nYou access level 2 and enter the Troubled Seas.\n\nCongratulations! You have made it past the Dark Forest!\n\nOn your way out of this dreadful place you are blinded by something reflecting the sunlight into your line of sight.\nYou turn to look and see, very far into the distance, a beach. You decide to investigate.\nUpon arrival, you are confronted by a tall, repulsive man who appears to be a warlock. You know you must get to the castle,\nbut it is far away, located on an island only reachable by boat. The man agrees to take you,\non the condition that you answer an enigma. Be careful! Fail to answer correctly and you will upset him,\nwe don’t know what this evil warlock is capable of!&quot;)  
+self.text.append(&quot;\n\nYou access level 3 and enter The Treacherous Castle\n\nCongratulations! You have successfully answered the evil warlock’s enigma.\n\nIt was not easy, and your success renders you a strong competitor. But will you be victorious this time?\nArriving on the island of the Treacherous Castle, you have no choice but to follow the sharp and broken down path up to the gates.\nIn order to succeed in this mission, you have to kill the final monster and outsmart the final warlock.\nTheir strength and wit are nearly impossible to outweigh, so get ready for the biggest mental and physical battle of your life!&quot;)  
+self.text.append(&quot;\nHumans are very capable warriors. With their muscles and agility, they can operate any weapon \nand effectively damage any monster that crosses its path! \nIts weapon of choice is an iron sword capable of slashing through even the toughest of monster skins! \nWatch out though, as their intellectual skills differ, which may complicate solving enigmas.&quot;)  
+self.text.append(&quot;\nSimilarly to dwarves, their small size helps them to set up the element of surprise. \nElves have some magic powers, such as hypnotization. Thanks to their special ears, they have extremely developed hearing. \nPossibly strong enough to hear the answers of enigmas from listening to the warlock’s thoughts.\nTo fight monsters, they throw special stones that explode when they make contact with their target.&quot;)  
+self.text.append(&quot;\nThe wizard is a strong but possibly tricky choice. He has many abilities and uses his magical powers to outsmart any monster. \nThey are extremely intuitive and therefore are good at solving enigmas. Use magic to fight your opponent, \nbut be careful to take breaks or you will drain all your powers at once and risk death!&quot;)  
+self.text.append(&quot;\nIts small size is an asset. The dwarf is able to outsmart large, clumsy monsters and use their own strength against themselves. \nChoose to be a dwarf and you will not be disappointed! Dwarves are agile little creatures, very good at stealing, \nand this might prove useful when it comes to solving enigmas! The dwarven axe is its weapon of choice, \na wooden and metal axe with a sharp pick.&quot;)  </code></pre>
+<p>def greetings (self): #|<br />
+print(self.text[0])<br />
+def printHelp (self): #|<br />
+print(self.text[1])<br />
+def gameOver (self): #|<br />
+print(self.text[2])
+def congrats (self): #|<br />
+print(self.text[3]) # —&gt; These functions display a specific message contained in the text list<br />
+def quit (self): #|<br />
+print(self.text[4])<br />
+def level1 (self): #|<br />
+print(self.text[5])<br />
+def level2 (self): #|<br />
+print(self.text[6])<br />
+def level3 (self): #|<br />
+print(self.text[7])<br />
+def human (self):<br />
+return self.text[8] #|<br />
+def elf (self):<br />
+return self.text[9] #|<br />
+def wizard (self): # —&gt; These functions returns a specific message contained in the text list, use of return to stock these messages in a “description” variable in Player class<br />
+return self.text[10] #|<br />
+def dwarf (self):<br />
+return self.text[11] #|</p>
+<p>class Game:<br />
+def <strong>init</strong>(self):</p>
+<pre><code>self.__wantsToQuit=False  #|  
+self.__dead=False         #|                        # --&gt; items that compose the while loop that determines if the game runs or stops  
+self.__goalScore=500      #|  
+self.used_enigmas=[]   #useful in method enigmaThreat in order not to have twice the same enigma  
+self.message=Message()            #|  
+self.player=Player(0,0,0,0)       #|  
+self.monster=Monster(0,0,0,0,0)   #|        
+self.enigma=Enigma(0,0,0,0,0,0)   #|                                # --&gt; COMPOSITION  
+self.weapon=Weapon(0,0,0,0)       #|  
+self.potion=Potion(0,0,0,0)       #|  
+self.shield=Shield(0,0,0,0)       #|  
+self.shop=Shop()                  #|  </code></pre>
+<p>def play (self):#most important method, makes the game run or stop</p>
+<pre><code>self.message.greetings()   
+self.createAvatar()  
+self.player.avatar()  
+self.player.getInfoAvatar()  
+self.message.printHelp()   
+
+while not self.__wantsToQuit and not self.__dead and self.player.getScore()&lt;self.__goalScore: #loop on which the game is built  
+  self.executeInput()         #|  
+  self.checkPlayerAlive()     #|     --&gt; constently updates the attributes checked in the while loop  
+  self.player.levelCheck()    #|  
+
+if not self.__wantsToQuit and self.player.getScore()&lt;self.__goalScore:    #|  
+  self.message.gameOver()                                                 #|  
+elif not self.__wantsToQuit and not self.__dead:                          #|  --&gt; display message   correponding to why the game ended  
+  self.message.congrats()                                                 #|  
+else:                                                                     #|  
+  self.message.quit()  </code></pre>
+<p>def executeInput (self): #read the input of the player, react according to the choice - reads and starts the different commands available</p>
+<pre><code>ans4=input(&quot;\n&quot;)  
+
+if ans4==&quot;1&quot;: #display menu  
+  self.message.printHelp()  
+
+elif ans4==&quot;2&quot;: #leads to next threat  
+  print(&quot;\nThis is your next threat:\n&quot;)  
+  self.threats()  
+
+elif ans4==&quot;3&quot;: #rest - increase player health  
+  if self.player.getHealth()&lt;80:  
+    self.player.rest()  
+    print(&quot;\nYou just rest and recovered, now your health is:&quot;,self.player.getHealth())  
+  else:  
+    print(&quot;\nIt&#39;s not the time to rest, Terraria counts on you!&quot;)  
+
+elif ans4==&quot;4&quot;: #display shop  
+  self.shop.enterShop()  
+  print(&quot;\n\nYou have&quot;,self.player.getDiamonds(),&quot;diamonds.\n&quot;)  
+  self.shop.displayShopList()  
+  self.secretShop()  
+
+elif ans4==&quot;5&quot;: #update attribute   self.__wantsToQuit  
+  answer=input(&quot;\nAre your sure you want to quit? Yes or No:\n&quot;)  
+  if answer==&quot;No&quot; or answer==&quot;no&quot;:  
+    self.__wantsToQuit=False  
+  elif answer==&quot;Yes&quot; or answer==&quot;yes&quot;:  
+    self.__wantsToQuit=True  
+  else:  
+    print(&quot;\nSorry, can you repeat? Write 1 if you need help&quot;)  
+else:  
+  print(&quot;\nSorry, can you repeat? Write 1 if you need help&quot;)  </code></pre>
+<p>def checkPlayerAlive (self): #verify the player is alive - health&gt;0</p>
+<pre><code>if self.player.getHealth()&gt;0:  
+  self.__dead=False  
+else:  
+  self.__dead=True  </code></pre>
+<p>def createAvatar (self): #complementary to the method in Player class, this one starts creating an avatar depending on the input of the player</p>
+<pre><code>name=input(&quot;\n\nPlease enter the Name of your Avatar:\n\n&quot;)  
+
+ans1=int(input(&quot;\n\nPlease indicate your gender, type: 1 for male, 2 for female, 3 for other:\n\n&quot;)) #use int to convert to number instead of text  
+if ans1==1:  
+  gender=&quot;Male&quot;  
+elif ans1==2:  
+  gender=&quot;Female&quot;  
+else:  
+  gender=&quot;Other&quot;  
+
+z=0  
+while z==0: #loop that stops when the player gave a valid answer  
+  ans2=input(&quot;\n\nPlease select your species, type: 1 for human, 2 for elf, 3 for wizard, 4 for dwraf:\n\n&quot;)  
+  if ans2==&quot;1&quot;:  
+    species=&quot;Human&quot;  
+    z=1  
+  elif ans2==&quot;2&quot;:  
+    species=&quot;Elf&quot;  
+    z=1  
+  elif ans2==&quot;3&quot;:  
+    species=&quot;Wizard&quot;  
+    z=1  
+  elif ans2==&quot;4&quot;:  
+    species=&quot;Dwarf&quot;  
+    z=1  
+  else:  
+    print(&quot;\nSorry, we did not understand&quot;)  
+    z=0  
+  
+self.player=Player(name,gender,species,0) #create the player object  </code></pre>
+<p>def secretShop (self): #effects of buying items in the shop: decrease diamonds, add item to player; depends on which item is chosen</p>
+<pre><code>ans7=int(input(&quot;\n\nEnter a number:&quot;))  
+if ans7==0:  
+  self.potion=itemList[0]  
+  if self.player.getDiamonds()&lt;self.potion.getPrice():  
+    print(&quot;\nYou don&#39;t have enough diamonds&quot;)  
+  else:  
+    self.player.increaseHealth(self.potion.getPercentage())    #|  
+    if self.player.getHealth()&gt;100:                            #|  --&gt; potion&#39;s effect - increase helath with 100 as threshold  
+      self.player.setHealth(100)                               #|  
+    self.player.increaseDiamonds(-self.potion.getPrice())  
+    print(&quot;\nCongrats! Your health increased by&quot;,self.potion.getPercentage(),&quot;and amounts now to&quot;,self.player.getHealth())  
+elif ans7==1:  
+  self.potion=itemList[1]  
+  if self.player.getDiamonds()&lt;self.potion.getPrice():  
+    print(&quot;\nYou don&#39;t have enough diamonds&quot;)  
+  else:  
+    self.player.increaseHealth(self.potion.getPercentage())     #|  
+    if self.player.getHealth()&gt;100:                             #|  --&gt; potion&#39;s effect - increase helath with 100 as threshold  
+      self.player.setHealth(100)                                #|  
+    self.player.increaseDiamonds(-self.potion.getPrice())  
+    print(&quot;\nCongrats! Your health increased by&quot;,self.potion.getPercentage(),&quot;and amounts now to&quot;,self.player.getHealth())  
+elif ans7==2:  
+  self.shield=itemList[2]  
+  if self.player.getDiamonds()&lt;self.shield.getPrice():  
+    print(&quot;\nYou don&#39;t have enough diamonds&quot;)  
+  else:  
+    self.player.setShield(self.shield.getNameShop())  
+    self.player.increaseDiamonds(-self.shield.getPrice())  
+    print(&quot;\nCongrats! Now you will be protected by a&quot;,self.shield.getNameShop()) 
+elif ans7==3:  
+  self.shield=itemList[3]  
+  if self.player.getDiamonds()&lt;self.shield.getPrice():  
+    print(&quot;\nYou don&#39;t have enough diamonds&quot;)  
+  else:  
+    self.player.setShield(self.shield.getNameShop())  
+    self.player.increaseDiamonds(-self.shield.getPrice())  
+    print(&quot;\nCongrats: Now you will be protected by a&quot;,self.shield.getNameShop())  
+elif ans7==4:  
+  self.shield=itemList[4]  
+  if self.player.getDiamonds()&lt;self.shield.getPrice():  
+    print(&quot;\nYou don&#39;t have enough diamonds&quot;)  
+  else:  
+    self.player.setShield(self.shield.getNameShop())  
+    self.player.increaseDiamonds(-self.shield.getPrice())  
+    print(&quot;\nCongrats! Now you will be protected by a&quot;,self.shield.getNameShop())  
+elif ans7==5:  
+  self.weapon=itemList[5]  
+  if self.player.getDiamonds()&lt;self.weapon.getPrice():  
+    print(&quot;\nYou don&#39;t have enough diamonds&quot;)  
+  else:  
+    self.player.setWeapon(self.weapon.getNameShop())  
+    self.player.increaseDiamonds(-self.weapon.getPrice())  
+    print(&quot;\nCongrats! Now you will be fighting with a&quot;,self.weapon.getNameShop())  
+elif ans7==6:  
+  self.weapon=itemList[6]  
+  if self.player.getDiamonds()&lt;self.weapon.getPrice():  
+    print(&quot;\nYou don&#39;t have enough diamonds&quot;)  
+  else:  
+    self.player.setWeapon(self.weapon.getNameShop())  
+    self.player.increaseDiamonds(-self.weapon.getPrice())  
+    print(&quot;\nCongrats! Now you will be fighting with a&quot;,self.weapon.getNameShop())  
+elif ans7==7:  
+  self.executeInput()  
+else:  
+  print(&quot;\nSorry, we did not understand&quot;)  </code></pre>
+<p>def decreaseMonsterHealth(self): #function applying the good decrease to monsters’ health, depending on the posession of a weapon</p>
+<pre><code>if self.player.getWeapon()==self.weapon.getNameShop():                                                              #|  
+  b=self.weapon.getPercentage()                                                                                     #|    --&gt; applies effect of buying a weapon   
+  self.monster.setCurrentMonsterHealth(self.monster.getCurrentMonsterHealth()-round(random.randint(20,40)*(1+b)))   #|   
+else:  
+  self.monster.setCurrentMonsterHealth(self.monster.getCurrentMonsterHealth()-random.randint(20,40))  </code></pre>
+<p>def decreasePlayerHealth(self,x): #function applying the good decrease to players’ health, depending on the posession of a shield, the monster or the enigma</p>
+<pre><code>if self.player.getShield()==self.shield.getNameShop(): #|  
+  a=self.shield.getPercentage()                        #|     --&gt; applies effect of buying a shield  
+  self.player.decreaseHealth(round(x*(1-a)))           #|    
+else:  
+  self.player.decreaseHealth(x)  </code></pre>
+<p>def threats(self): # launch the good threat according to the level in which the player is</p>
+<pre><code>if self.player.getLevel()==1:  
+  self.threatMonster()  
+elif self.player.getLevel()==2:  
+  self.threatEnigma()  
+else:  
+  self.level3()  </code></pre>
+<p>def threatMonster(self): #functioning of threats of level 1</p>
+<pre><code>self.monster=random.choice(monsterList)  
+self.monster.monsterInfo()  
+
+while self.monster.monsterAlive()==True and self.player.getHealth()&gt;0:    #loop when fighting monster, stops if monster is dead or player is dead  
+  print(&quot;\n\nThe monster health is&quot;,self.monster.getCurrentMonsterHealth(),&quot;\nYour health is&quot;,self.player.getHealth())  
+  print(&quot;\n\nWrite &#39;attack&#39; to fight the monster:&quot;)  
+  ans3=input(&quot;\n&quot;)  
+  if ans3==&quot;attack&quot;:  
+    self.decreaseMonsterHealth()  
+    self.decreasePlayerHealth(self.monster.getMPlayerHealthPoint())  
+  else:  
+    &quot;\nSorry can you repeat?&quot;  
+  
+if self.player.getHealth()&gt;0:   
+  self.player.increasePlayerScore(self.monster.getScorePoint())  
+  self.player.increaseDiamonds(self.monster.getDiamonds())  
+  self.monster.resetMonster()  
+  print(&quot;\n\nYou defeated the&quot;,self.monster.getName(),&quot;! \n\nYour score increased by:&quot;,self.monster.getScorePoint(),&quot;and you won&quot;,self.monster.getDiamonds(),&quot;diamonds.\nNow your score is:&quot;,self.player.getScore(),&quot;and your health is:&quot;,self.player.getHealth())  </code></pre>
+<p>def threatEnigma(self): #functioning of threats of level 2</p>
+<pre><code>self.enigma=random.choice(enigmaList)  
+
+while self.enigma in self.used_enigmas: #loop that enables not to get twice the same enigma  
+  self.enigma=random.choice(enigmaList)  
+
+self.used_enigmas.append(self.enigma)  
+self.enigma.enigmaInfo1()  
+
+while self.enigma.enigmaSolved()==False and self.player.getHealth()&gt;0: #loop when answering enigma, stops if the enigma is solved or player is dead  
+  self.player.decreaseHealth(self.enigma.getEPlayerHealthPoint())  
+  print(&quot;\nYou failed to solve the enigma and paid the price, now your health is&quot;,self.player.getHealth(),&quot;\n\nYou can try again, but be careful you might not survive another failure!&quot;)  
+  self.enigma.enigmaInfo2()  
+
+if self.player.getHealth()&gt;0:  
+  self.player.increasePlayerScore(self.enigma.getScorePoint())  
+  self.player.increaseDiamonds(self.enigma.getDiamonds())  
+  print(&quot;\n\nYou solved&quot;,self.enigma.getName(),&quot;!\n\nYour score increased by:&quot;,self.enigma.getScorePoint(),&quot;and you won&quot;,self.enigma.getDiamonds(),&quot;diamonds.\nNow your score is:&quot;,self.player.getScore(),&quot;and your health is:&quot;,self.player.getHealth())  </code></pre>
+<p>def level3(self): #functioning of threats of level 3</p>
+<pre><code>self.enigma=random.choice(enigmaListFinal)  
+self.enigma.enigmaInfo1()  
+
+while self.enigma.enigmaSolved()==False and self.player.getHealth()&gt;0:    #loop when answering enigma, stops if the enigma is solved or player is dead   
+  self.player.decreaseHealth(self.enigma.getEPlayerHealthPoint())  
+  print(&quot;\nYou failed to solve the enigma and paid the price, now your health is&quot;,self.player.getHealth(),&quot;\n\nYou can try again, but be careful you might not survive another failure!&quot;)  
+  self.enigma.enigmaInfo2()  
+
+if self.player.getHealth()&gt;0:  
+  self.player.increasePlayerScore(self.enigma.getScorePoint())  
+  self.player.increaseDiamonds(self.enigma.getDiamonds())  
+  print(&quot;\n\nYou solved&quot;,self.enigma.getName(),&quot;!\n\nYour score increased by:&quot;,self.enigma.getScorePoint(),&quot;and you won&quot;,self.enigma.getDiamonds(),&quot;diamonds.\nNow your score is:&quot;,self.player.getScore(),&quot;and your health is:&quot;,self.player.getHealth())  
+
+
+print(&quot;\n\nThis is your last threat, defeat the monster to save Terraria!\n&quot;)  
+self.monster=monster6  
+self.monster.monsterInfo()  
+
+while self.monster.monsterAlive()==True and self.player.getHealth()&gt;0: #loop when fighting monster, stops if monster is dead or player is dead  
+  print(&quot;\n\nThe monster health is&quot;,self.monster.getCurrentMonsterHealth(),&quot;\nYour health is&quot;,self.player.getHealth())  
+  print(&quot;\n\nWrite &#39;attack&#39; to fight the monster:&quot;)  
+  ans5=input(&quot;\n&quot;)  
+  if ans5==&quot;attack&quot;:  
+    self.decreaseMonsterHealth()  
+    self.decreasePlayerHealth(self.monster.getMPlayerHealthPoint())  
+  else:  
+    print(&quot;\nSorry,can you repeat?&quot;)  
+
+if self.player.getHealth()&gt;0:  
+  self.player.increasePlayerScore(self.monster.getScorePoint())  
+  self.player.increaseDiamonds(self.monster.getDiamonds())  
+  print(&quot;\n\nYou defeated the&quot;,self.monster.getName(),&quot;!&quot;)  </code></pre>
+</div>
 </div>
 </div>
