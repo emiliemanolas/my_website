@@ -35,6 +35,8 @@ knitr::include_graphics(c("/img/GCO.jpg","/img/GCO1.jpg"), error =FALSE)
 I now have a horse with my mom, his name is Good Time
 
 *Good Time*
+![](Good1.jpg) ![](goo.jpg)
+![](good1.jpg) ![](good2.jpg)
 ```{r, echo=FALSE}
 knitr::include_graphics(c("/img/Good1.jpg","/img/goo.jpg"), error =FALSE)
 knitr::include_graphics(c("/img/good1.jpeg","/img/good2.jpeg"), error =FALSE)
