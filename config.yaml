@@ -5,7 +5,7 @@ theme: forty
 googleAnalytics: ''
 disqusShortname: ''
 params:
-  banner:
+  banner: lbs.jpg
     buttonText: Let's Go!
     subtitle: |-
       Welcome to my website, an introduction to my story, my passions and some of my works. 
@@ -52,9 +52,9 @@ params:
   image: ''
   name: Your name
   navigation:
-    button1:
-      - name: Curious?
-        url: blogs
+    #button1:
+      #- name: Curious?
+        #url: blogs
     links:
       - name: Home
         url: '#'
