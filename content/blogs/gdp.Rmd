@@ -16,4 +16,173 @@ title: Cracking GDP Composition
 
 ## A case study of China's, France's and the US' GDP
 
+Here we want to understand the elements composing the GDP of China France and the US. Additionally, we want to see the weight of each element and their evolution over time.
 
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+library(scales)
+```
+
+
+```{r read_GDP_data}
+
+UN_GDP_data  <-  read_excel(here::here("data", "Download-GDPconstant-USD-countries.xls"), # Excel filename
+                sheet="Download-GDPconstant-USD-countr", # Sheet name
+                skip=2) # Number of rows to skip
+
+```
+
+```{r reshape_GDP_data}
+#tidy the data
+tidy_GDP_data  <-  UN_GDP_data %>% 
+  pivot_longer(cols = 4:51, 
+              names_to = "Year", 
+              values_to = "GDP") %>% 
+  #display value in billions
+  transform(GDP = GDP/1e9)
+
+tidy_GDP_data_frame <- data.frame(tidy_GDP_data)
+
+#names
+tidy_GDP_data_frame[tidy_GDP_data_frame == "Imports of goods and services"] <- "Imports"
+tidy_GDP_data_frame[tidy_GDP_data_frame == "Exports of goods and services"] <- "Exports"
+tidy_GDP_data_frame[tidy_GDP_data_frame == "General government final consumption expenditure"] <- "Government expenditure"
+tidy_GDP_data_frame[tidy_GDP_data_frame == "Household consumption expenditure (including Non-profit institutions serving households)"] <- "Household expenditure"
+
+
+glimpse(tidy_GDP_data_frame)
+
+
+# Let us compare GDP components for these 3 countries
+country_list <- c("France","China", "United States")
+```
+
+GDP is the sum of Household Expenditure, Gross Capital Formation, Government Expenditure and Net Exports (exports - imports). Thus, we calculate the GDP using these.
+
+We plot the value of the different GDP components for China, France and the US over time. 
+
+```{r fig.width = 9.5}
+tidy_GDP_data_frame_Order <- tidy_GDP_data_frame %>%
+  filter(Country %in% country_list, IndicatorName %in% c("Gross capital formation", "Exports", "Imports", "Household expenditure", "Government expenditure"))
+
+tidy_GDP_data_frame_Order[,3]<-factor(tidy_GDP_data_frame_Order[,3], levels = c("Gross capital formation", "Exports","Government expenditure","Household expenditure","Imports")) #to order IndicatorName
+
+tidy_GDP_data_frame_Order %>%
+  group_by(Country)%>%
+  ggplot(aes(x = Year, y = GDP, color = IndicatorName, group = IndicatorName))+
+  geom_line(size = 1)+
+  facet_wrap(~Country)+
+  scale_x_discrete(breaks = seq(1970,2017, by = 10))+
+  labs(title = "GDP components over time", 
+       subtitle = "In constant 2010 USD",
+       y = "Bilion US$",
+       x = "")+
+  theme_bw()+
+    NULL
+```
+
+
+```{r, echo=False}
+
+tidy_GDP_data_wide <- tidy_GDP_data_frame %>%
+  pivot_wider (names_from="IndicatorName",values_from="GDP")
+
+tidy_GDP_data_frame_wide <- data.frame(tidy_GDP_data_wide)
+
+GDP_data_frame <- data.frame(tidy_GDP_data_frame_wide %>% 
+  mutate(GDP_calculated = 
+           Household.expenditure + 
+           Gross.capital.formation + 
+           Government.expenditure + 
+           Exports - Imports
+         ) %>% 
+  mutate(GDP_percentage_diff = 
+           percent((GDP_calculated - Gross.Domestic.Product..GDP.)/Gross.Domestic.Product..GDP.)
+         )
+)
+
+```
+
+We plot the weight of each GDP component for China, France and the US over time.
+
+```{r fig.width = 11}
+GDP_proportion <- GDP_data_frame %>%
+  mutate(C = Household.expenditure/GDP_calculated, 
+         G = Government.expenditure/GDP_calculated, 
+         I = Gross.capital.formation/GDP_calculated, 
+         Net_Exports = (Exports - Imports)/GDP_calculated) %>%
+  select(Country, Year, C, G, I, Net_Exports) %>% 
+  pivot_longer(cols = 3:6, 
+              names_to = "Indicator Name", 
+              values_to = "Proportion")
+
+GDP_proportion_frame <- data.frame(GDP_proportion)
+
+#names
+GDP_proportion_frame[GDP_proportion_frame == "C"] <- "Household Expenditure"
+GDP_proportion_frame[GDP_proportion_frame == "G"] <- "Government Expenditure"
+GDP_proportion_frame[GDP_proportion_frame == "I"] <- "Gross capital formation"
+GDP_proportion_frame[GDP_proportion_frame == "Net_Exports"] <- "Net Exports"
+
+GDP_proportion_frame[,3]<-factor(GDP_proportion_frame[,3], levels = c("Government Expenditure","Gross capital formation","Household Expenditure","Net Exports")) #to order Indicator.Name
+
+GDP_proportion_frame %>%
+  filter(Country %in% country_list) %>%
+  group_by(Country) %>%
+  ggplot(aes(x = Year, 
+             y = Proportion, 
+             color = Indicator.Name, 
+             group = Indicator.Name))+
+  geom_line(size = 1)+
+  facet_wrap(~Country)+
+  scale_x_discrete(breaks = seq(1970,2017, by = 10))+
+  scale_colour_manual(values = c("#F8766D", "#82B20C", "#1FC7CB", "#C77CFE")) +
+  scale_y_continuous(labels = percent)+
+  labs(
+    title = "GDP and its breakdown at constant 2010 prices in US Dollars",
+    y = "proportion",
+    caption = "Source: United Nations, https://unstats.un.org/unsd/snaama/Downloads"
+    )+
+  theme_bw()+
+    NULL
+
+```
+
+
+The last chart gives us more insight into the components of GDP for China, France and the United States. We see the proportion of total GDP that each indicator represents, in other words it enables us to understand which indicator is the most important and which is the least for the economy of each country. Last, we can analyse the changes in GDP compostitution over time from 1970 to 2017.
+
+We can see some similarities as well as some differences between the 3 countries. 
+First, Net Exports is the lowest indicator, it was even negative for many years for each country: for China until 1985, for France most of the time apart from 1992 to 2006 approximately and for the United States most of the years. This means that during these periods, these countries import more then they export, resulting in Net Export negatively countributing to GDP (i.e. decreasing GDP). 
+Second, Household expenditures make up for most of the GDP of France (~55%) and the US (60% - 70%). It was also the case for China until approximately 2003, after that year Gross capital formation started to be the most important component of China's GDP.
+
+Third for both France and the US, Gross capital formation and government expenditures have been quite close to each other, making up for 20% to 25% of France's GDP and 15% to 20% of the US' GDP. Government expenditures for China have remained quite stable in terms of proportion, representing 20% to 25% of the countries' GDP.
+
+To conclude, this data is very coherent with the economic situation of each country, with France and the US being quite similar and China displaying a different GDP's composition. China exports a lot of products abroad while France and the US mostly present a higher imports compared to exports. Additionally, China is a country that has been devleoping itself and growing at a fast pace the last decades, while France and the US remained more stable and this explains why business investments are so important for China and compose most of its GDP.
