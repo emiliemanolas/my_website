@@ -5,7 +5,7 @@ theme: forty
 googleAnalytics: ''
 disqusShortname: ''
 params:
-  banner: lbs.jpg
+  banner:
     buttonText: Let's Go!
     subtitle: |-
       Welcome to my website, an introduction to my story, my passions and some of my works. 
@@ -95,7 +95,7 @@ params:
       - image: ter.jpg
         subtitle: My Fabulous Game
         title: Terraria
-        url: blogs/game
+        url: blogs/terra
   two:
     buttonText: Let's Go!
     enable: yes

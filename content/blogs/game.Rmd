@@ -5,15 +5,16 @@ categories:
 date: "2021-10-20"
 description: Terraria
 draft: false
-image: ter.jpg 
+image: ter.jpg
+
 keywords: ""
-slug: game
+slug: teraa
 title: Terraria
 ---
 
 # Terraria
 
-##My Amazing Game
+##My Fabulous Game
 
 This is a game I coded as part of a university project.
 
