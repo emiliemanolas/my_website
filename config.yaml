@@ -92,10 +92,10 @@ params:
         subtitle: A case study of China's, France's and the US' GDP
         title: Cracking GDP Composition
         url: blogs/gdp
-      - image: pic06.jpg
+      - image: ter.jpg
         subtitle: My Fabulous Game
         title: Terraria
-        url: blogs/ipsum
+        url: blogs/game
   two:
     buttonText: Let's Go!
     enable: yes
