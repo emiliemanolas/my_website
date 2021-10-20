@@ -1,15 +1,14 @@
 ---
-categories:  
-- ""
-- ""
-date: "2021-10-20"
+title: "About Me"
+date: '2021-10-20'
 description: About Me
-draft: false
+draft: no
 image: mee.jpg
-
-keywords: ""
+keywords: ''
 slug: me
-title: About Me
+categories:
+- ''
+- ''
 ---
 
 # About Me
@@ -26,7 +25,7 @@ knitr::include_graphics("/img/Wick2.jpg", error =FALSE)
 ```
 ```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
 knitr::include_graphics("/img/Wick5.jpg",error =FALSE)
-knitr::include_graphics("/img/Wick5.jpg",error =FALSE)
+knitr::include_graphics("/img/Wick6.jpg",error =FALSE)
 ```
 
 ## CV
@@ -93,12 +92,8 @@ Excel, PowerPoint, Word, Power BI, SQL, Python (intermediate), R (basic), Azure 
 
 Here are some pictures of my amazing dog, **Junior**.
 
-```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
-knitr::include_graphics("/img/Ju1.jpg",error =FALSE)
-knitr::include_graphics("/img/ju3.jpg",error =FALSE)
-```
 ```{r, echo=FALSE}
-knitr::include_graphics("/img/J1.jpg", error =FALSE)
+knitr::include_graphics(c("/img/J1.jpg","/img/ju3.jpg"), error =FALSE)
 ```
 
 

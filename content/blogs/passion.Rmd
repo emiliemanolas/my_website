@@ -1,14 +1,14 @@
 ---
-categories:  
-- ""
-- ""
-date: "2021-10-20"
-description: My Passions 
-draft: false
-image: Trav.jpg 
-keywords: ""
+title: "My Passions"
+date: '2021-10-20'
+description: My Passions
+draft: no
+image: Trav.jpg
+keywords: ''
 slug: trav
-title: My Passions
+categories:
+- ''
+- ''
 ---
 
 # My Passions
@@ -38,14 +38,11 @@ I now have a horse with my mom, his name is Good Time
 
 *Good Time*
 
-```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+```{r, echo=FALSE}
 knitr::include_graphics("/img/Good1.jpg", error =FALSE)
-knitr::include_graphics("/img/goo.jpg", error =FALSE)
-```
-
-```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
-knitr::include_graphics("/img/good1.jpeg", error =FALSE)
 knitr::include_graphics("/img/good2.jpeg", error =FALSE)
+knitr::include_graphics("/img/good1.jpeg", error =FALSE)
+knitr::include_graphics("/img/goo.jpg", error =FALSE)
 ```
 
 
@@ -114,9 +111,8 @@ knitr::include_graphics("/img/Malta2.jpg", error =FALSE)
 
 ### Portugal
 
-*I'm also a foodie*
 
-```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+```{r, echo=FALSE}
 knitr::include_graphics("/img/Portual1.jpg", error =FALSE)
 knitr::include_graphics("/img/Portugal2.jpg", error =FALSE)
 ```
