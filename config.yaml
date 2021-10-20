@@ -63,7 +63,7 @@ params:
       - name: My Passions
         url: blogs/trav
       - name: My Game
-        url: blogs/game
+        url: blogs/terraria
       - name: Blogs
         url: blogs
     menu: Menu
@@ -95,7 +95,7 @@ params:
       - image: ter.jpg
         subtitle: My Fabulous Game
         title: Terraria
-        url: blogs/terra
+        url: blogs/terraria
   two:
     buttonText: Let's Go!
     enable: yes

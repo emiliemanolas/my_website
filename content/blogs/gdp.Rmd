@@ -9,7 +9,6 @@ draft: false
 image: gdp.jpg 
 keywords: ""
 slug: gdp
-title: Cracking GDP Composition
 ---
 
 # Cracking GDP Composition
@@ -110,7 +109,7 @@ tidy_GDP_data_frame_Order %>%
 ```
 
 
-```{r, echo=False}
+```{r, echo=FALSE}
 
 tidy_GDP_data_wide <- tidy_GDP_data_frame %>%
   pivot_wider (names_from="IndicatorName",values_from="GDP")

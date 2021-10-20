@@ -1,34 +1,28 @@
 ---
-categories:  
-- "Python"
-- ""
-date: "2021-10-20"
+title: "Terraria"
+date: '2021-10-20'
 description: Terraria
-draft: false
+draft: no
 image: ter.jpg
-
-keywords: ""
+keywords: ''
 slug: teraa
-title: Terraria
+categories:
+- ''
+- ''
 ---
 
 # Terraria
 
-##My Fabulous Game
+## My Fabulous Game
 
 This is a game I coded as part of a university project.
 
 You can play it [here](https://colab.research.google.com/gist/emiliemanolas/96c17fadcec4b83c60a489a9e5657cf1/terraria-game.ipynb)
 
 
-**Function launching the game**
-```{python}
-game=Game()
-game.play()
-```
 
-**Code of the Game**
-```{python}
+### Code of the Game
+
 import random #useful to randomly pick up a monster/enigma
 
 class Item: #ENCAPSULATION, contains attributes of the different items of the shop
@@ -611,5 +605,11 @@ class Game:
       self.player.increasePlayerScore(self.monster.getScorePoint())
       self.player.increaseDiamonds(self.monster.getDiamonds())
       print("\n\nYou defeated the",self.monster.getName(),"!")
-```
 
+
+### Launching the game
+
+game=Game()
+game.play()
+
+`

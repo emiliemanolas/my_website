@@ -3,7 +3,7 @@ categories:
 - ""
 - ""
 date: "2021-10-20"
-description: My Passions # the title that will show up once someone gets to this page
+description: My Passions 
 draft: false
 image: Trav.jpg 
 keywords: ""
