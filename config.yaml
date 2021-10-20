@@ -25,6 +25,9 @@ params:
       - email: emanolas.mfa2022@london.edu
         title: Email
     enable: yes
+    phone:
+    - phone: +33606475094
+      title: Phone
   custom_css: []
   custom_js: []
   description: Your description
