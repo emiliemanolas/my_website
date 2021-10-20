@@ -20,9 +20,13 @@ My name is Emilie, I am French and Belgian. I was born in Colmar and grew up in 
 
 *Wickerschwihr*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Wick.jpg", "/img/Wick2.jpg"),error =FALSE)
-knitr::include_graphics(c("/img/Wick5.jpg", "/img/Wick6.jpg"),error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Wick.jpg", error =FALSE)
+knitr::include_graphics("/img/Wick2.jpg", error =FALSE)
+```
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Wick5.jpg",error =FALSE)
+knitr::include_graphics("/img/Wick5.jpg",error =FALSE)
 ```
 
 ## CV
@@ -89,8 +93,12 @@ Excel, PowerPoint, Word, Power BI, SQL, Python (intermediate), R (basic), Azure 
 
 Here are some pictures of my amazing dog, **Junior**.
 
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Ju1.jpg",error =FALSE)
+knitr::include_graphics("/img/ju3.jpg",error =FALSE)
+```
 ```{r, echo=FALSE}
-knitr::include_graphics(c("/img/J1.jpg","/img/Ju1.jpg","/img/ju3.jpg"), error =FALSE)
+knitr::include_graphics("/img/J1.jpg", error =FALSE)
 ```
 
 

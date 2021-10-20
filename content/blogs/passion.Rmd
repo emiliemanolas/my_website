@@ -28,18 +28,24 @@ knitr::include_graphics("/img/baby.jpeg", error =FALSE)
 I started training when I was only 3 years old and would go to practice lessons once a week, when growing up that frequency increased, I started to pass the "galop" level, participate in competitions and eventually achieved galop 6/7 level.
 
 *Competitions*
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/GCO.jpg","/img/GCO1.jpg"), error =FALSE)
+
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/GCO.jpg", error =FALSE)
+knitr::include_graphics("/img/GCO1.jpg", error =FALSE)
 ```
 
 I now have a horse with my mom, his name is Good Time
 
 *Good Time*
-![](Good1.jpg) ![](goo.jpg)
-![](good1.jpg) ![](good2.jpg)
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Good1.jpg","/img/goo.jpg"), error =FALSE)
-knitr::include_graphics(c("/img/good1.jpeg","/img/good2.jpeg"), error =FALSE)
+
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Good1.jpg", error =FALSE)
+knitr::include_graphics("/img/goo.jpg", error =FALSE)
+```
+
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/good1.jpeg", error =FALSE)
+knitr::include_graphics("/img/good2.jpeg", error =FALSE)
 ```
 
 
@@ -50,29 +56,33 @@ knitr::include_graphics(c("/img/good1.jpeg","/img/good2.jpeg"), error =FALSE)
 
 *Montreux*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/lake.jpg","/img/lake2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/lake.jpg", error =FALSE)
+knitr::include_graphics("/img/lake2.jpg", error =FALSE)
 ```
 
 
 *Verdon Gorge*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/VerdonG1.jpg","/img/VerdonG2.jpg","/img/VerdonG3.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/VerdonG1.jpg", error =FALSE)
+knitr::include_graphics("/img/VerdonG3.jpg", error =FALSE)
 ```
 
 
 *Saint-Tropez*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/STrop1.jpg","/img/STrop2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/STrop1.jpg", error =FALSE)
+knitr::include_graphics("/img/STrop2.jpg", error =FALSE)
 ```
 
 
 *Paris*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Paris1.jpg","/img/Paris2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Paris1.jpg", error =FALSE)
+knitr::include_graphics("/img/Paris2.jpg", error =FALSE)
 ```
 
 
@@ -80,22 +90,25 @@ knitr::include_graphics(c("/img/Paris1.jpg","/img/Paris2.jpg"), error =FALSE)
 
 *Alicante*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Alicante1.jpg","/img/Alicante2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Alicante1.jpg", error =FALSE)
+knitr::include_graphics("/img/Alicante2.jpg", error =FALSE)
 ```
 
 
 *Valencia*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Valencia1.jpg","/img/Valencia2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Valencia1.jpg", error =FALSE)
+knitr::include_graphics("/img/Valencia2.jpg", error =FALSE)
 ```
 
 
 ### Malta
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Malta1.jpg","/img/Malta2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Malta1.jpg", error =FALSE)
+knitr::include_graphics("/img/Malta2.jpg", error =FALSE)
 ```
 
 
@@ -103,8 +116,9 @@ knitr::include_graphics(c("/img/Malta1.jpg","/img/Malta2.jpg"), error =FALSE)
 
 *I'm also a foodie*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Portual1.jpg", "/img/Portugal2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Portual1.jpg", error =FALSE)
+knitr::include_graphics("/img/Portugal2.jpg", error =FALSE)
 ```
 
 
@@ -112,8 +126,9 @@ knitr::include_graphics(c("/img/Portual1.jpg", "/img/Portugal2.jpg"), error =FAL
 
 *Junior on the beach*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Belg1.jpg","/img/BelgJu.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Belg1.jpg", error =FALSE)
+knitr::include_graphics("/img/BelgJu.jpg", error =FALSE)
 ```
 
 
@@ -121,8 +136,9 @@ knitr::include_graphics(c("/img/Belg1.jpg","/img/BelgJu.jpg"), error =FALSE)
 
 *Santorini*
 
-```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Sant1.jpg","/img/Sant2.jpg"), error =FALSE)
+```{r, fig.show = "hold", out.width = "50%", fig.align = "default", echo=FALSE}
+knitr::include_graphics("/img/Sant1.jpg", error =FALSE)
+knitr::include_graphics("/img/Sant2.jpg", error =FALSE)
 ```
 
 
