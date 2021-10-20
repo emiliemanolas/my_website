@@ -26,7 +26,7 @@ params:
         title: Email
     enable: yes
     phone:
-    - phone: +33606475094
+    - phone: 0033606475094
       title: Phone
   custom_css: []
   custom_js: []

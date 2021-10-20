@@ -166,7 +166,6 @@ class Enigma(Threat): #INHERITANCE of Threat - ENCAPSULATION:
     print("\n",self.getName(),"\n\n",self.__question,"\nWrite the corresponding letter: a, b, c or d \n\n",self.__options)  
 
   def enigmaSolved(self): #check if player gave the good anwer, useful in Game class for the loop of enigma Threat (stops when enigma solved)  
-    
     if input()==self.__solution:  
       return True  
     else:  
@@ -284,7 +283,7 @@ class Message: #narrative - contains different messages used along the game
   def __init__ (self):  
     self.text=[] # list that contains the different messages  
     self.text.append("Welcome, lone traveller! \n\nIt seems that you have gotten lost on your journey and have stumbled into an alternate dimension.\nYou have stumbled upon the fantastic world of Terraria. You see, our world was once a fruitful and exciting place.\nThat is, until the DEN (Dark Evil Nation) attacked. With their terrible monsters and spiteful warlocks they brought pain, suffering,\nand sorrow onto our beautiful land and you are our last hope. We need your help to fight these terrible monsters and answer difficult enigmas posed by the evil warlocks.\nWhat do you say? Are you in? The land of Terraria depends on you!")  
-    self.text.append("\n\nYou have 5 commands, write the corresponding number to access it \n\n   1. Help \n   2. Move to next threat \n   3. Rest \n   4. Shop \n   5. Quit")  
+    self.text.append("\n\nYou have 5 commands, write the corresponding number to access it \n\n   1. Help \n   2. Move to next threat \n   3. Rest \n   4. Shop \n   5. Quit")
     self.text.append("\n\nGame over! You have lost all your health points and your body cannot recover! Please try again.")
     self.text.append("\n\nCongratulations! You have battled the most ferocious monsters and outsmarted powerful warlocks.\nYou achieve victory against the Dark Evil Nation.\n\nThanks to your bravery and efforts Terraria is saved from the DEN and it is now a wonderful place full of life.")  
     self.text.append("\n\nGood bye! Terraria hopes to see you soon!")  
@@ -490,7 +489,6 @@ class Game:
       self.executeInput()  
     else:  
       print("\nSorry, we did not understand")  
-
 
   def decreaseMonsterHealth(self): #function applying the good decrease to monsters' health, depending on the posession of a weapon  
     if self.player.getWeapon()==self.weapon.getNameShop():                                                              #|  
