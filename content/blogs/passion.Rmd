@@ -102,7 +102,7 @@ knitr::include_graphics(c("/img/Malta1.jpg","/img/Malta2.jpg"), error =FALSE)
 *I'm also a foodie*
 
 ```{r, echo=FALSE}
-knitr::include_graphics(c("/img/Portual1.jpg","/img/Portugal3.jpg", "/img/Portugal2.jpg"), error =FALSE)
+knitr::include_graphics(c("/img/Portual1.jpg", "/img/Portugal2.jpg"), error =FALSE)
 ```
 
 
