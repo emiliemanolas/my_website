@@ -117,7 +117,7 @@ class Monster(Threat): #INHERITANCE of Threat - ENCAPSULATION
     self.__currentMonsterHealth=x  
   
   def monsterAlive (self): #check if monster is alive, useful in Game class for the loop of monsterThreat (stops when monster dead)  
-    if self.__currentMonsterHealth > 0: 
+    if self.__currentMonsterHealth > 0:  
       return True  
     else:  
       return False  
@@ -506,7 +506,7 @@ class Game:
       self.player.decreaseHealth(x)  
 
 
-  def threats(self): # launch the good threat according to the level in which the player is  
+  def threats(self): # launch the good threat according to the level in which the player is 
     if self.player.getLevel()==1:  
       self.threatMonster()  
     elif self.player.getLevel()==2:  
