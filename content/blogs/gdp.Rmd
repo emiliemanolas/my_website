@@ -6,7 +6,7 @@ date: "2021-10-20"
 description: Cracking GDP Composition 
 title: Cracking GDP Composition
 draft: false
-image: gdp.jpeg 
+image: gdp.jpg 
 keywords: ""
 slug: gdp
 title: Cracking GDP Composition

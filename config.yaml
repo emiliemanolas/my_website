@@ -8,7 +8,8 @@ params:
   banner:
     buttonText: Let's Go!
     subtitle: |-
-      Welcome to my website, an introduction my story, my passions and some of my works. 
+      Welcome to my website, an introduction to my story, my passions and some of my works. 
+      
       Ready to discover more about me?
     title: Hey it's Emilie!
   blog: {}
@@ -87,7 +88,7 @@ params:
         subtitle: Who's the best?
         title: Spielberg vs Burton
         url: blogs/svsb
-      - image: gdp.jpeg
+      - image: gdp.jpg
         subtitle: A case study of China's, France's and the US' GDP
         title: Cracking GDP Composition
         url: blogs/gdp
@@ -102,6 +103,6 @@ params:
       If you want to get to know me you're in the right place!  
       I will tell you my story, give you an overview of my ambitions, where I grew up, lived and studied. You'll also have the opportunity to discover my passions.  
       Wait that's not all! You'll also get the chance to see some of my work on R and Python!  
-      Exciting right? ;)."
+      Exciting right? ;)"
     title: My Story
     url: blogs
